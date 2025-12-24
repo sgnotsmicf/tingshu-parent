@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>tingshu-parent</artifactId>
+        <groupId>com.atguigu.tingshu</groupId>
+        <version>1.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>service</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>service-album</module>
+        <module>service-search</module>
+        <module>service-account</module>
+        <module>service-dispatch</module>
+        <module>service-order</module>
+        <module>service-payment</module>
+        <module>service-user</module>
+    </modules>
+
+    <dependencies>
+        <!--引入Caffeine -->
+        <!-- 引入Caffeine缓存核心包 -->
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
+
+        <!-- 引入Spring Cache对Caffeine的支持（自动配置CaffeineCacheManager） -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atguigu.tingshu</groupId>
+            <artifactId>service-util</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.atguigu.tingshu</groupId>
+            <artifactId>service-account-client</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.atguigu.tingshu</groupId>
+            <artifactId>service-album-client</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.atguigu.tingshu</groupId>
+            <artifactId>service-order-client</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.atguigu.tingshu</groupId>
+            <artifactId>service-user-client</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atguigu.tingshu</groupId>
+            <artifactId>rabbit-util</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+
+</project>

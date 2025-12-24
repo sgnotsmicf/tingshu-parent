@@ -1,0 +1,58 @@
+# ========================== 编译输出目录 ==========================
+# Maven/Gradle编译生成的class文件和打包目录
+target/
+classes/
+build/
+out/
+# Gradle构建的缓存和输出
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
+# ========================== IDE配置文件 ==========================
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+# Eclipse
+.project
+.classpath
+.settings/
+*.launch
+# VS Code
+.vscode/
+*.code-workspace
+# ========================== 构建工具配置 ==========================
+# Maven本地缓存（一般不需要提交）
+.mvn/
+# 构建过程中的临时文件
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+# ========================== 日志与临时文件 ==========================
+# 日志文件
+*.log
+logs/
+# 临时文件
+*.tmp
+*.temp
+*.bak
+# ========================== 系统文件 ==========================
+# Windows系统
+Thumbs.db
+Desktop.ini
+# Mac系统
+.DS_Store
+.AppleDouble
+.LSOverride
+# Linux系统
+*~
+# ========================== 其他依赖/缓存 ==========================
+# 本地仓库依赖（如手动放的jar包，非必要不提交）
+lib/
+# 测试报告
+surefire-reports/
