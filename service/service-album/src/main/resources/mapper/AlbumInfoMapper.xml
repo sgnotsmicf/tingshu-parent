@@ -27,7 +27,7 @@
                 and info.status = #{vo.status}
             </if>
             <if test="vo.albumTitle != null and vo.albumTitle != '' ">
-                and info.album_title = #{vo.albumTitle}
+                and info.album_title like concat('%', #{vo.albumTitle}, '%')
             </if>
             and info.is_deleted = 0
         </where>

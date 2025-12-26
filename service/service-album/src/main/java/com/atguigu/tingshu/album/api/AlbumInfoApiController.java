@@ -3,6 +3,7 @@ package com.atguigu.tingshu.album.api;
 import com.atguigu.tingshu.album.service.AlbumInfoService;
 import com.atguigu.tingshu.common.result.Result;
 import com.atguigu.tingshu.common.util.AuthContextHolder;
+import com.atguigu.tingshu.model.album.AlbumInfo;
 import com.atguigu.tingshu.query.album.AlbumInfoQuery;
 import com.atguigu.tingshu.vo.album.AlbumInfoVo;
 import com.atguigu.tingshu.vo.album.AlbumListVo;
@@ -10,7 +11,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Tag(name = "专辑管理")
 @RestController
@@ -23,7 +27,7 @@ public class AlbumInfoApiController {
 
 	@Operation(summary = "内容创作者或者平台运营人员-保存专辑")
 	@PostMapping("/albumInfo/saveAlbumInfo")
-	public Result saveAlbumInfo(@RequestBody AlbumInfoVo albumInfoVo) {
+	public Result saveAlbumInfo(@RequestBody @Validated AlbumInfoVo albumInfoVo) {
 		Long userId = AuthContextHolder.getUserId() == null ? 1L : AuthContextHolder.getUserId();
 		return albumInfoService.saveAlbumInfo(userId, albumInfoVo);
 	}
@@ -53,5 +57,67 @@ public class AlbumInfoApiController {
 		return Result.ok(pageParam);
 	}
 
+
+
+
+
+
+	/**
+	 * 根据专辑ID删除专辑
+	 *
+	 * @param id
+	 * @return
+	 */
+	@Operation(summary = "根据专辑ID删除专辑")
+	@DeleteMapping("/albumInfo/removeAlbumInfo/{id}")
+	public Result removeAlbumInfo(@PathVariable Long id) {
+		albumInfoService.removeAlbumInfo(id);
+		return Result.ok();
+	}
+
+
+	/**
+	 * 根据专辑ID查询专辑信息（包括专辑标签列表）
+	 *
+	 * @param id 专辑ID
+	 * @return 专辑信息
+	 */
+	@Operation(summary = "根据专辑ID查询专辑信息（包括专辑标签列表）")
+	@GetMapping("/albumInfo/getAlbumInfo/{id}")
+	public Result<AlbumInfo> getAlbumInfo(@PathVariable Long id) {
+		AlbumInfo albumInfo = albumInfoService.getAlbumInfo(id);
+		return Result.ok(albumInfo);
+	}
+
+
+	/**
+	 * 修改专辑信息
+	 * @param id 专辑ID
+	 * @param albumInfo 专辑修改后信息
+	 * @return
+	 */
+	@Operation(summary = "更新专辑信息")
+	@PutMapping("/albumInfo/updateAlbumInfo/{id}")
+	public Result updateAlbumInfo(@PathVariable Long id, @Validated @RequestBody AlbumInfoVo albumInfoVo) {
+		albumInfoService.updateAlbumInfo(id, albumInfoVo);
+		return Result.ok();
+	}
+
+
+
+	/**
+	 * TODO 该接口必须登录才能访问
+	 * 获取当前用户全部专辑列表
+	 * @return
+	 */
+	@Operation(summary = "获取当前用户全部专辑列表")
+	@GetMapping("/albumInfo/findUserAllAlbumList")
+	public Result<List<AlbumInfo>> getUserAllAlbumList(){
+		//1.从ThreadLocal中获取当前登录用户ID
+		Long userId = AuthContextHolder.getUserId() == null ? 1L : AuthContextHolder.getUserId();
+		//2.调用业务逻辑获取专辑列表
+		List<AlbumInfo> list  = albumInfoService.getUserAllAlbumList(userId);
+		return Result.ok(list);
+	}
 }
 
